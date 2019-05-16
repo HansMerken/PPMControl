@@ -30,6 +30,8 @@ namespace ControlGUI
         public Form1()
         {
             InitializeComponent();
+            MessageBox.Show("hi");
+
 
             SetPlaying(false);
             _channelValues = new byte[CHANNELS_COUNT];
@@ -165,26 +167,31 @@ namespace ControlGUI
                 joystickTimer.Enabled = true;
         }
 
-
-        private void joystickTimer_Tick_1(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            try
-            {
-                joystick.UpdateStatus();
-                
 
-                
-                label1.Text = joystick.Xaxis.ToString();
-
-
-              
-            }
-            catch
-            {
-                joystickTimer.Enabled = false;
-                connectToJoystick(joystick);
-            }
         }
+
+
+        //private void joystickTimer_Tick_1(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        joystick.UpdateStatus();
+
+
+
+        //        label1.Text = joystick.Xaxis.ToString();
+
+
+
+        //    }
+        //    catch
+        //    {
+        //        joystickTimer.Enabled = false;
+        //        connectToJoystick(joystick);
+        //    }
+        //}
 
     }
 }

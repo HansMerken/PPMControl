@@ -190,6 +190,10 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "label1";
             // 
+            // joystickTimer
+            // 
+            this.joystickTimer.Enabled = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -202,6 +206,7 @@
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "PPM Control";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.trackbarElevator)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackbarEleron)).EndInit();
