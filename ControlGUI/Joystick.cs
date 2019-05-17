@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.DirectX.DirectInput;
 using System.Windows.Forms;
 using System;
+using System.Diagnostics;
 
 namespace ControlGUI
 {
@@ -15,18 +16,20 @@ namespace ControlGUI
         private JoystickState state;
         public int Xaxis; // X-axis movement
         public int Yaxis; //Y-axis movement
-        private IntPtr hWnd;
+        private static IntPtr hWnd;
         public bool[] buttons;
         private string systemJoysticks;
 
         #endregion
 
-        public Joystick(IntPtr window_handle)
+       public Joystick(IntPtr window_handle)
+       
         {
             hWnd = window_handle;
             Xaxis = -1;
         }
 
+        
         public string FindJoysticks()
         {
             systemJoysticks = null;
@@ -43,6 +46,7 @@ namespace ControlGUI
                     {
                         // create a device from this controller so we can retrieve info.
                         joystickDevice = new Device(deviceInstance.InstanceGuid);
+
                         joystickDevice.SetCooperativeLevel(hWnd, CooperativeLevelFlags.Background | CooperativeLevelFlags.NonExclusive);
 
                         systemJoysticks = joystickDevice.DeviceInformation.InstanceName;
