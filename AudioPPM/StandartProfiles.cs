@@ -8,11 +8,11 @@
         public static PpmProfile FlySky =>
             new PpmProfile()
             {
-                PauseDuration = 400,
+                PauseDuration = 100, //400
                 Polarity = PpmPolarity.HIGH,
                 MinChannelDuration = 1000,
                 MaxChannelDuration = 2000,
-                Period = 20000
+                Period = 20000 //20000
             };
     }
 }

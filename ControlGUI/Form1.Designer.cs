@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.trackbarElevator = new System.Windows.Forms.TrackBar();
             this.trackbarEleron = new System.Windows.Forms.TrackBar();
             this.trackbarThrottle = new System.Windows.Forms.TrackBar();
@@ -40,7 +41,6 @@
             this.btnStop = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
             this.joystickTimer = new System.Windows.Forms.Timer(this.components);
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackbarElevator)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackbarEleron)).BeginInit();
@@ -62,6 +62,15 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Control";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(0, 208);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "label1";
             // 
             // trackbarElevator
             // 
@@ -164,15 +173,7 @@
             // joystickTimer
             // 
             this.joystickTimer.Enabled = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(0, 208);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "label1";
+            this.joystickTimer.Tick += new System.EventHandler(this.JoystickTimer_Tick);
             // 
             // Form1
             // 

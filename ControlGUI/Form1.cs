@@ -23,7 +23,7 @@ namespace ControlGUI
     {
         PpmGenerator _generator;
         private Joystick joystick;
-        private const int CHANNELS_COUNT = 6;
+        private const int CHANNELS_COUNT = 4;
         readonly byte[] _channelValues;
         IList<MMDevice> _devices;
         private bool _isPlaying;
@@ -31,9 +31,11 @@ namespace ControlGUI
         public Form1()
         {
             InitializeComponent();
-           
-            // MessageBox.Show("hi");  
 
+            // MessageBox.Show("hi");  
+            // here be errors
+            joystick = new Joystick(this.Handle);
+            connectToJoystick(joystick);
 
 
             SetPlaying(false);
@@ -76,9 +78,7 @@ namespace ControlGUI
             SetPlaying(true);
 
 
-            // here be errors
-            joystick = new Joystick(this.Handle);
-            connectToJoystick(joystick);
+         
           
         }
 
@@ -179,22 +179,20 @@ namespace ControlGUI
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            joystickTimer.Enabled = true;
         }
 
 
         private void joystickTimer_Tick_1(object sender, EventArgs e)
         {
+
+            label1.Text = joystick.Xaxis.ToString();
+       
             try
             {
                 joystick.UpdateStatus();
-
-
-
-                label1.Text = joystick.Xaxis.ToString();
-
-
-
+                                                           
+                               
             }
             catch
             {
@@ -203,5 +201,23 @@ namespace ControlGUI
             }
         }
 
+        private void JoystickTimer_Tick(object sender, EventArgs e)
+        {
+            
+            try
+            {
+                joystick.UpdateStatus();
+                label1.Text = joystick.Xaxis.ToString();
+                trackbarRudder.Value = joystick.Xaxis / 256;
+                trackbarThrottle.Value = joystick.Yaxis / 256;
+               // UpdateValues();
+
+            }
+            catch
+            {
+                joystickTimer.Enabled = false;
+                connectToJoystick(joystick);
+            }
+        }
     }
 }
