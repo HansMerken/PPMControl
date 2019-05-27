@@ -16,6 +16,7 @@ namespace ControlGUI
         private JoystickState state;
         public int Xaxis; // X-axis movement
         public int Yaxis; //Y-axis movement
+        public int Zaxis; //Z-axis movement
         private static IntPtr hWnd;
         public bool[] buttons;
         private string systemJoysticks;
@@ -111,8 +112,9 @@ namespace ControlGUI
 
             int[] extraAxis = state.GetSlider();
             
-            Xaxis = state.X;
-            Yaxis = state.Y;
+            Xaxis = state.X; //Stuur
+            Yaxis = state.Y; //Gas
+            Zaxis = state.Rz; //Z,Rx,Ry is niets Rz is rem
 
             byte[] jsButtons = state.GetButtons();
             buttons = new bool[jsButtons.Length];

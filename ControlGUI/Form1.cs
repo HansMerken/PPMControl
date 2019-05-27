@@ -186,7 +186,7 @@ namespace ControlGUI
         private void joystickTimer_Tick_1(object sender, EventArgs e)
         {
 
-            label1.Text = joystick.Xaxis.ToString();
+            label1.Text = joystick.Yaxis.ToString();
        
             try
             {
@@ -207,9 +207,9 @@ namespace ControlGUI
             try
             {
                 joystick.UpdateStatus();
-                label1.Text = joystick.Xaxis.ToString();
+                label1.Text = trackbarThrottle.Value.ToString();
                 trackbarRudder.Value = joystick.Xaxis / 256;
-                trackbarThrottle.Value = joystick.Yaxis / 256;
+                trackbarThrottle.Value = 256-((65536-joystick.Zaxis+joystick.Yaxis) / 512);
                // UpdateValues();
 
             }
