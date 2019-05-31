@@ -30,6 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.trackbarElevator = new System.Windows.Forms.TrackBar();
             this.trackbarEleron = new System.Windows.Forms.TrackBar();
@@ -51,6 +54,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.trackbarElevator);
             this.groupBox1.Controls.Add(this.trackbarEleron);
@@ -63,10 +69,38 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Control";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(244, 32);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(34, 13);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Limiet";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(244, 19);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(34, 13);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Limiet";
+            this.label3.Click += new System.EventHandler(this.Label3_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(71, 199);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "label2";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(0, 208);
+            this.label1.Location = new System.Drawing.Point(6, 88);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 4;
@@ -77,12 +111,13 @@
             this.trackbarElevator.AutoSize = false;
             this.trackbarElevator.Location = new System.Drawing.Point(284, 19);
             this.trackbarElevator.Maximum = 255;
+            this.trackbarElevator.Minimum = 128;
             this.trackbarElevator.Name = "trackbarElevator";
             this.trackbarElevator.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackbarElevator.Size = new System.Drawing.Size(26, 150);
             this.trackbarElevator.TabIndex = 3;
             this.trackbarElevator.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trackbarElevator.Value = 128;
+            this.trackbarElevator.Value = 160;
             // 
             // trackbarEleron
             // 
@@ -111,7 +146,7 @@
             // 
             this.trackbarRudder.AutoSize = false;
             this.trackbarRudder.Location = new System.Drawing.Point(9, 175);
-            this.trackbarRudder.Maximum = 255;
+            this.trackbarRudder.Maximum = 256;
             this.trackbarRudder.Name = "trackbarRudder";
             this.trackbarRudder.Size = new System.Drawing.Size(150, 26);
             this.trackbarRudder.TabIndex = 0;
@@ -187,6 +222,7 @@
             this.Name = "Form1";
             this.Text = "PPM Control";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackbarElevator)).EndInit();
@@ -212,6 +248,9 @@
         private System.Windows.Forms.ListBox listboxDevices;
         private System.Windows.Forms.Timer joystickTimer;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }
 
