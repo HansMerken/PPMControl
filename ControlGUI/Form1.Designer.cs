@@ -46,6 +46,7 @@
             this.joystickTimer = new System.Windows.Forms.Timer(this.components);
             this.label5 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.shutdownTimer = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackbarElevator)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackbarEleron)).BeginInit();
@@ -219,9 +220,10 @@
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(30, 268);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(175, 39);
+            this.label5.Size = new System.Drawing.Size(36, 39);
             this.label5.TabIndex = 2;
-            this.label5.Text = "0 seconds";
+            this.label5.Text = "0";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // numericUpDown1
             // 
@@ -240,6 +242,12 @@
             0,
             0,
             0});
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            // 
+            // shutdownTimer
+            // 
+            this.shutdownTimer.Interval = 1000;
+            this.shutdownTimer.Tick += new System.EventHandler(this.shutdownTimer_Tick);
             // 
             // Form1
             // 
@@ -288,6 +296,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Timer shutdownTimer;
     }
 }
 

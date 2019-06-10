@@ -27,14 +27,12 @@ public partial class Form1 : Form
     readonly byte[] _channelValues;
     IList<MMDevice> _devices;
     private bool _isPlaying;
+    private int _countdownValue;
 
     public Form1()
     {
         InitializeComponent();
-            // Comment Timer
-            //Q Comment
-        // MessageBox.Show("hi");  
-        // here be errors
+
         joystick = new Joystick(this.Handle);
         connectToJoystick(joystick);
 
@@ -53,6 +51,7 @@ public partial class Form1 : Form
             this.Focus();
             this.KeyPreview = true;
             this.KeyDown += new KeyEventHandler(Form1_KeyDown);
+            _countdownValue = (int) numericUpDown1.Value;
         
     }
 
@@ -89,22 +88,39 @@ public partial class Form1 : Form
             return;
         }
 
-        _generator = new PpmGenerator(CHANNELS_COUNT, StandartProfiles.FlySky, _devices[listboxDevices.SelectedIndex]);
+            startShutdownTimer();
+            label5.Text = "Countdown ACTIVE!";
+
+            _generator = new PpmGenerator(CHANNELS_COUNT, StandartProfiles.FlySky, _devices[listboxDevices.SelectedIndex]);
         _generator.SetValues(_channelValues);
         _generator.Start();
         SetPlaying(true);
 
-
-         
           
     }
 
+        private void startShutdownTimer()
+        {
+            _countdownValue = (int)numericUpDown1.Value;
+            shutdownTimer.Start();
+            numericUpDown1.Enabled = false;
+        }
+
+        private void stopShutdownTimer()
+        {
+            shutdownTimer.Stop();
+            _countdownValue = (int)numericUpDown1.Value;
+            _generator?.Stop();
+            SetPlaying(false);
+            numericUpDown1.Enabled = true;
+        }
 
     // Stop PPM Generator
     private void btnStop_Click(object sender, EventArgs e)
     {
         _generator?.Stop();
         SetPlaying(false);
+        stopShutdownTimer();
     }
 
     private void btnUpdate_Click(object sender, EventArgs e)
@@ -120,7 +136,6 @@ public partial class Form1 : Form
 
     private void Form1_KeyPress(object sender, KeyEventArgs e)
     {
-        MessageBox.Show("hi");
         if(e.KeyCode == Keys.Space)
         {
             joystickTimer.Stop();
@@ -260,7 +275,34 @@ public partial class Form1 : Form
             {
                 _generator?.Stop();
                 SetPlaying(false);
+                stopShutdownTimer();
             }
         }
-}
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void shutdownTimer_Tick(object sender, EventArgs e)
+        {
+            label5.Text = _countdownValue.ToString() + " seconds left";
+
+            if (_countdownValue <= 0)
+                stopShutdownTimer();
+
+            _countdownValue--;
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            _countdownValue = (int) numericUpDown1.Value;
+            label5.Text = _countdownValue.ToString();
+        }
+    }
 }
