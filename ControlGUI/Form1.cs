@@ -31,7 +31,7 @@ public partial class Form1 : Form
     public Form1()
     {
         InitializeComponent();
-
+            // Comment Timer
         // MessageBox.Show("hi");  
         // here be errors
         joystick = new Joystick(this.Handle);
