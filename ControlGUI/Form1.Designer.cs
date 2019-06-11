@@ -44,9 +44,9 @@
             this.btnStop = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
             this.joystickTimer = new System.Windows.Forms.Timer(this.components);
-            this.label5 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.shutdownTimer = new System.Windows.Forms.Timer(this.components);
+            this.countdownLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackbarElevator)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackbarEleron)).BeginInit();
@@ -214,34 +214,18 @@
             this.joystickTimer.Enabled = true;
             this.joystickTimer.Tick += new System.EventHandler(this.JoystickTimer_Tick);
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(30, 268);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(36, 39);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "0";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
-            // 
             // numericUpDown1
             // 
             this.numericUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown1.Location = new System.Drawing.Point(37, 326);
+            this.numericUpDown1.Location = new System.Drawing.Point(15, 241);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             999999,
             0,
             0,
             0});
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(234, 31);
+            this.numericUpDown1.Size = new System.Drawing.Size(17, 31);
             this.numericUpDown1.TabIndex = 3;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            300,
-            0,
-            0,
-            0});
             this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
             // shutdownTimer
@@ -249,13 +233,23 @@
             this.shutdownTimer.Interval = 1000;
             this.shutdownTimer.Tick += new System.EventHandler(this.shutdownTimer_Tick);
             // 
+            // countdownLabel
+            // 
+            this.countdownLabel.AutoSize = true;
+            this.countdownLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.countdownLabel.Location = new System.Drawing.Point(38, 237);
+            this.countdownLabel.Name = "countdownLabel";
+            this.countdownLabel.Size = new System.Drawing.Size(151, 39);
+            this.countdownLabel.TabIndex = 4;
+            this.countdownLabel.Text = "00:00:00";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(857, 377);
+            this.ClientSize = new System.Drawing.Size(857, 284);
+            this.Controls.Add(this.countdownLabel);
             this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -294,9 +288,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Timer shutdownTimer;
+        private System.Windows.Forms.Label countdownLabel;
     }
 }
 

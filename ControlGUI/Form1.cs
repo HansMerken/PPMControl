@@ -28,6 +28,8 @@ public partial class Form1 : Form
     IList<MMDevice> _devices;
     private bool _isPlaying;
     private int _countdownValue;
+    private TimeSpan _countdownClock;
+    private int _countdownStartValue;
 
     public Form1()
     {
@@ -52,8 +54,15 @@ public partial class Form1 : Form
             this.KeyPreview = true;
             this.KeyDown += new KeyEventHandler(Form1_KeyDown);
             _countdownValue = (int) numericUpDown1.Value;
-        
-    }
+
+
+            _countdownStartValue = 300;
+            numericUpDown1.Value = _countdownStartValue;
+            _countdownClock = new TimeSpan(00,00,_countdownStartValue);
+            countdownLabel.Text = _countdownClock.ToString();
+
+
+        }
 
     #region GUI EVENTS
 
@@ -87,11 +96,10 @@ public partial class Form1 : Form
             MessageBox.Show("Please, select the output device", "PPM Control", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             return;
         }
-
+             countdownLabel.Text = _countdownClock.ToString();
             startShutdownTimer();
-            label5.Text = "Countdown ACTIVE!";
-
-            _generator = new PpmGenerator(CHANNELS_COUNT, StandartProfiles.FlySky, _devices[listboxDevices.SelectedIndex]);
+       //     label5.Text = "Countdown ACTIVE!";
+        _generator = new PpmGenerator(CHANNELS_COUNT, StandartProfiles.FlySky, _devices[listboxDevices.SelectedIndex]);
         _generator.SetValues(_channelValues);
         _generator.Start();
         SetPlaying(true);
@@ -101,7 +109,7 @@ public partial class Form1 : Form
 
         private void startShutdownTimer()
         {
-            _countdownValue = (int)numericUpDown1.Value;
+            _countdownStartValue = (int)numericUpDown1.Value;
             shutdownTimer.Start();
             numericUpDown1.Enabled = false;
         }
@@ -109,7 +117,8 @@ public partial class Form1 : Form
         private void stopShutdownTimer()
         {
             shutdownTimer.Stop();
-            _countdownValue = (int)numericUpDown1.Value;
+            _countdownStartValue = (int)numericUpDown1.Value;
+            // _countdownValue = (int)numericUpDown1.Value;
             _generator?.Stop();
             SetPlaying(false);
             numericUpDown1.Enabled = true;
@@ -291,18 +300,25 @@ public partial class Form1 : Form
 
         private void shutdownTimer_Tick(object sender, EventArgs e)
         {
-            label5.Text = _countdownValue.ToString() + " seconds left";
+            _countdownClock = _countdownClock.Subtract(new TimeSpan(0, 0, 1));
+            countdownLabel.Text = _countdownClock.ToString();
 
-            if (_countdownValue <= 0)
+            if (_countdownClock.TotalSeconds == 0)
+            {
                 stopShutdownTimer();
+                _countdownClock = new TimeSpan(0, 0, _countdownStartValue);
+              //  countdownLabel.Text = _countdownClock.ToString();
 
-            _countdownValue--;
+            }
+
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
-            _countdownValue = (int) numericUpDown1.Value;
-            label5.Text = _countdownValue.ToString();
+            _countdownStartValue = (int) numericUpDown1.Value;
+            _countdownClock = new TimeSpan(0, 0, _countdownStartValue);
+            countdownLabel.Text = _countdownClock.ToString();
+
         }
     }
 }
