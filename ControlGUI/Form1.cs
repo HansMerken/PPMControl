@@ -56,7 +56,7 @@ public partial class Form1 : Form
             _countdownValue = (int) numericUpDown1.Value;
 
 
-            _countdownStartValue = 300;
+            _countdownStartValue = 900;
             numericUpDown1.Value = _countdownStartValue;
             _countdownClock = new TimeSpan(00,00,_countdownStartValue);
             countdownLabel.Text = _countdownClock.ToString();
