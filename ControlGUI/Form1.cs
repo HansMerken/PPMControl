@@ -68,12 +68,16 @@ public partial class Form1 : Form
 
     private void Trackbar_ValueChanged(object sender, EventArgs e)
     {
-        if (trackbarThrottle.Value >= trackbarElevator.Value)
-        {
-            trackbarThrottle.Value = trackbarElevator.Value;
+       // if (trackbarThrottle.Value >= trackbarElevator.Value) //set maximum
+        //{
+         //   trackbarThrottle.Value = trackbarElevator.Value;
                 
 
-        }
+       // }
+            // map value to maximum
+
+      // trackbarThrottle.Value = map(trackbarThrottle.Value,126,255,126,trackbarElevator.Value);
+
 
         label1.Text = trackbarThrottle.Value.ToString();
         label2.Text = trackbarRudder.Value.ToString();
@@ -319,6 +323,11 @@ public partial class Form1 : Form
             _countdownClock = new TimeSpan(0, 0, _countdownStartValue);
             countdownLabel.Text = _countdownClock.ToString();
 
+        }
+
+        private static int map(int value, int fromLow, int fromHigh, int toLow, int toHigh)
+        {
+            return (value - fromLow) * (toHigh - toLow) / (fromHigh - fromLow) + toLow;
         }
     }
 }
